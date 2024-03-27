@@ -1,8 +1,48 @@
 # 1. Linked Lists
 
 ## Linked Lists
-First thing to know about linked list is that they are made up of list nodes(Nodes). A list node an object that encapsulates two things at a minimum (Value + Next = pointer). The pointer is gonna tell us what is the next list node in the linked list. So this is essentially a way of connecting multiple list nodes together which forms a linked list. 
+First thing to know about linked list is that they are made up of list nodes(Nodes). A list node an object that encapsulates two things at a minimum (Value + Next = pointer). The pointer is gonna tell us what is the next list node in the linked list. So this is essentially a way of connecting multiple list nodes together which forms a linked list.   
+
+So now let's understand how these nodes can be connected together. So first I'm gonna create one list node. The value I'm gonna give it in this case is gonna be a string. Let's call it 'Red'. And the next pointer is initially gonna be empty or we could say it's by default set to null so it's not pointing at anything. That means this list node is not connected to anybody yet. And we know when we create this object, it's gonna go somewhere in memory. We know that we're gonna have a red node somewhere in memory and it's not going to be pointing at any other node yet.    
+
+ Next, we'll create a couple more nodes. Let's say a blue node and a green node. So now that we have three list nodes, it's time to actually connect them together. In most languages the next pointer is actually a reference to another list node. That's how it's implemented. So in terms of code, this is what we could do.    
+
+ We could set list node 1 assuming that's the name of our variable our object that we created. ListNode1.next = ListNode2. So it basically tell it that the next node in the list is going to be that node.    
+
+ Now what's actually happening under the hood at the lowest level is we have some address for our second list node our second list node. The way we know how we know to get to the second node is at the lowest level maybe your language or operating system is doing this. The pointer tells it that the address is here. So that's how we know how to get to the second node. But usually depending on the language that you're using you don't have to worry so much about the address because the reference to that object is enough.
+
+> As you can see here, the Nodes are out of order in the way that we're going to connect them. But the order in actuall memory is the opposite. What this means is that linked lists are not stored in memory the same way that we use them as programmers. They could be in some random order in memory but they're connected via pointers.   
 
 
+So this is the difference from a linked list compared to arrays. Arrays are stored the same way in memory, but linked list as we can see are not necessarily stored the same in memory.    
 
-> 1) Reading the data   
+
+Now what if we wanted to start at the beginning of our linked list and then loop through every single node until we got to the end and we would know we got to the End by the way because our last pointer is not pointing at anything.    
+
+A code for that would look something like this.   
+> cur = ListNode1   
+while(cur!=null) cur = cur.next   
+
+
+We keep looping as long as our pointer cur is not pointing at null. What that means is that we have a valid linked list node.   
+
+Now my question for you is what would have happended instead if this next pointer of the third node is acutally pointing at the first node. It will keep doing the same over and over again and it wouldn't be very fun to run because the program would crash. It's an infinite loop.    
+
+But going back to the first case, where we didn't have an infinte loop, what was the time complexity of going through the entire linked list. It's a O(n) and n is the size of the linked list.   
+
+So let's assume that we always have pointers that can give us access to the first element and the last element. Suppose we now wanted to add a new element to the end of the linked list. All we need to do is just connect the pointer.    
+
+> tail.next = ListNode4   
+tail = ListNode4   
+
+Time complexity : O(1)   
+
+Since we already had a tail pointer at the last node, we didn't have to iterate through every single elements in the linked lists.   
+
+Removing is also always constant time operation but there's a really big caveat that's assuming we have a pointer to the previous node that we're trying to remove. 
+> head.next = head.next.next   
+
+Now if we want to, we can free the memory that this node is taking up but in most languages we have garbage collection so we don't really need to care of that. 
+
+
+More benefits than array. Practically speaking removing elemnts stil can take O(n) because we would have to start from the beginning. 
